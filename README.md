@@ -4,6 +4,7 @@
 **Project Idea:** **Customer Segmentation Analysis**
 ***Description:*** Perform customer segmentation to identify distinct groups based on purchasing behavior.
 ***Dataset:*** https://www.kaggle.com/datasets/carrie1/ecommerce-data
+
 ***Tasks:***
 - Data cleaning and preprocessing.
 - Exploratory Data Analysis (EDA).
@@ -14,6 +15,7 @@
 **Project Idea:** **Sales Performance Analysis**
 ***Description:*** Analyze sales data to identify trends, seasonality, and performance of different product categories.
 ***Dataset:*** https://www.kaggle.com/datasets/vivek468/superstore-dataset-final
+
 ***Tasks:***
 - Sales data cleaning and transformation.
 - Calculate key performance metrics (e.g., total sales, average sales per day).
@@ -24,6 +26,7 @@
 **Project Idea:** **Financial Statement Analysis**
 ***Description:*** Analyze financial statements to evaluate company performance and financial health.
 ***Dataset:*** https://www.kaggle.com/datasets/rohanrao/nifty50-stock-market-data
+
 ***Tasks:***
 - Extract and transform financial data.
 - Perform ratio analysis (e.g., liquidity ratios, profitability ratios).
@@ -34,6 +37,7 @@
 **Project Idea:** **Price Elasticity of Demand Analysis**
 ***Description:*** Analyze how changes in prices affect the demand for products.
 ***Dataset:*** https://www.kaggle.com/datasets/rohitsahoo/sales-forecasting
+
 ***Tasks:***
 - Clean and preprocess sales and pricing data.
 - Calculate price elasticity for different products.
@@ -44,6 +48,7 @@
 **Project Idea:** **Market Basket Analysis**
 ***Description:*** Perform market basket analysis to identify product associations and improve cross-selling strategies.
 ***Dataset:*** https://archive.ics.uci.edu/ml/datasets/Online+Retail
+
 ***Tasks:***
 - Data cleaning and preprocessing.
 - Use association rules mining (e.g., Apriori algorithm).
@@ -54,6 +59,7 @@
 **Project Idea:** **Predictive Maintenance for Machinery**
 ***Description:*** Develop a predictive maintenance model to predict equipment failures and schedule maintenance.
 ***Dataset:*** https://www.kaggle.com/datasets/patrickmulrooney/predictive-maintenance-dataset
+
 ***Tasks:***
 - Data cleaning and feature engineering.
 - Perform EDA to understand failure patterns.
