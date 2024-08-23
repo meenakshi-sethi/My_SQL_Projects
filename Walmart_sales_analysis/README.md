@@ -1,25 +1,36 @@
-## *Walmart Sales Analysis using MySQL*
+# Walmart Sales Analysis using MySQL
 
-### About the Project
+## Table of Contents
+- [About the Project](#about-the-project)
+- [Objective of the Project](#objective-of-the-project)
+- [Tools](#tools)
+- [Future Enhancements](#future-enhancements)
+- [About the Data](#about-the-data)
+  - [Data Dictionary](#data-dictionary)
+  - [Purpose of the Data](#purpose-of-the-data)
+  - [Data Source](#data-source)
+  - [Usage](#usage)
+
+## About the Project
 This project analyzes Walmart sales data to uncover insights that can drive business decisions. The main goals are to understand sales patterns, customer behavior, product performance, and profitability across different store branches.
 
-### Objective of the Project
+## Objective of the Project
 The major objective of this project is to gain insight into Walmart's sales data to understand the various factors that affect sales across different branches.
 
-### Tools
+## Tools
 - **MySQL**: Used for data storage and analysis.
 - **Pandas**: For initial data cleaning.
 - **GitHub**: For version control and project management.
 
-### Future Enhancements
+## Future Enhancements
 - **Predictive Analytics**: Adding machine learning for sales forecasting.
 - **Visualization**: Creating interactive dashboards.
 - **Cross-Store Analysis**: Extending analysis to multiple stores.
 
-### About the Data
+## About the Data
 The dataset used for this analysis contains transactional data from a Walmart store. It includes detailed information about each sale, such as the branch where the transaction occurred, customer demographics, product categories, pricing, and payment methods.
 
-#### Data Dictionary
+### Data Dictionary
 
 | Column Name       | Description                                                                                      |
 |-------------------|--------------------------------------------------------------------------------------------------|
