@@ -1068,6 +1068,82 @@ SET timeofday = (CASE
     ELSE "Evening"
 END);
 
+SET SQL_SAFE_UPDATES = 0;
 
+-- day name
+SELECT transdate, DAYNAME(transdate) AS dayname FROM sales;
+ALTER TABLE sales ADD COLUMN dayname VARCHAR(10);
+
+UPDATE sales 
+SET dayname = DAYNAME(transdate);
+
+-- month
+SELECT transdate, MONTHNAME(transdate) AS monthname FROM sales;
+
+ALTER TABLE sales ADD COLUMN monthname VARCHAR(10);
+
+UPDATE sales 
+SET monthname = MONTHNAME(transdate);
 
 ---------------------------------------------------------------------------------------------------------------------
+---------------------- Exploratory Data analysis----------------------------------------------------------------------
+
+-- A. Product Analysis ----------------------------------------------------------------------------------------------
+-- A.1. Count of Unique Product Lines in Sales Data
+SELECT COUNT(DISTINCT prodline) as Nos_UniqueProducts 
+FROM Sales;
+
+-- A.2. Most Common Payment Method
+SELECT payment, COUNT(payment) AS Nos 
+FROM Sales
+GROUP BY payment
+ORDER BY COUNT(payment) DESC;
+
+-- A.3. Top Selling Product Lines
+SELECT prodline AS Products, COUNT(prodline) AS cnt
+FROM Sales
+GROUP BY prodline
+ORDER BY cnt DESC
+LIMIT 3;
+
+-- A.4. Total Monthly Revenue Analysis
+SELECT monthname AS Months, SUM(total) AS Revenue
+FROM Sales
+GROUP BY monthname
+ORDER BY Revenue DESC; 
+
+-- A.5 Month with the Largest Cost of Goods Sold (COGS)
+SELECT monthname AS Months, SUM(cogs) AS Cost
+FROM Sales
+GROUP BY monthname
+ORDER BY Cost DESC;
+
+-- A.6. Product Line with the Largest Revenue
+SELECT prodline AS Products, Sum(total) AS Revenue
+FROM Sales
+GROUP BY prodline
+ORDER BY Revenue DESC;
+
+-- A.7. Branch with the Highest Revenue
+SELECT branch, Sum(total) AS Revenue
+FROM Sales
+GROUP BY branch
+ORDER BY Revenue DESC;
+
+-- A.8. Product Revenue Analysis Across Branches
+SELECT prodline AS Product, branch AS Branch, Sum(total) AS Revenue
+FROM Sales
+GROUP BY prodline, branch
+ORDER BY Revenue DESC;
+
+-- A.9 Branch-wise Product Analysis
+SELECT branch AS Branch, prodline AS Products, Sum(Total) AS Revenue
+FROM Sales
+GROUP BY branch, prodline
+ORDER BY branch, Revenue DESC;
+
+-- A.10. Product Line with the Highest Product Tax
+SELECT prodline AS Products, Sum(tax) AS Tax
+FROM Sales
+GROUP BY prodline
+ORDER BY Tax DESC;
