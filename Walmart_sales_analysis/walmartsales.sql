@@ -1147,3 +1147,21 @@ SELECT prodline AS Products, Sum(tax) AS Tax
 FROM Sales
 GROUP BY prodline
 ORDER BY Tax DESC;
+
+-- A.11. Average Tax by Product Line
+SELECT prodline AS Products, AVG(tax) AS AvgTax
+FROM sales
+GROUP BY prodline
+ORDER BY AvgTax DESC;
+
+-- A.12. Product Line Performance Evaluation: Good vs. Bad Based on Sales Above Average
+SELECT *
+FROM Sales;
+
+
+-- A.13 Which branch sold more products than average product sold?
+SELECT branch as Branch, SUM(Quantity) as Quantity
+FROM sales
+GROUP BY Branch
+HAVING SUM(quantity) > (SELECT AVG(Quantity) FROM sales)
+ORDER BY Quantity DESC;
