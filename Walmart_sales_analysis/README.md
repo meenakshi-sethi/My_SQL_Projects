@@ -19,7 +19,6 @@ The major objective of this project is to gain insight into Walmart's sales data
 
 ## Tools
 - **MySQL**: Used for data storage and analysis.
-- **Pandas**: For initial data cleaning.
 - **GitHub**: For version control and project management.
 
 ## Future Enhancements
