@@ -57,10 +57,9 @@ The dataset used in this analysis contains transactional data from a Walmart sto
 
 **Modifications:**
 
-To focus more effectively on branch-wise sales analysis, several columns were removed from the original dataset:
+To focus more effectively on branch-wise sales analysis, City columns were removed from the original dataset:
 
 - **City**: Removed because branch data provides sufficient geographic detail for this analysis.
-- **Time_of_Day**, **Day_Name**, and **Month_Name**: Removed since the date and time columns provide the necessary temporal information, and these derived columns were not needed for this specific analysis.
 
 This streamlined dataset allows for a more targeted examination of sales trends, customer behavior, and profitability across different Walmart branches.
 
