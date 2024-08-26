@@ -1033,8 +1033,6 @@ VALUES
 ('347-56-2442', 'A', 'Normal', 'Male', 'Home and lifestyle', 65.82, 1, 3.291, 69.111, '2019-02-22', '15:33:00', 'Cash', 65.82, 4.761904762, 3.291, 4.1),
 ('849-09-3807', 'A', 'Member', 'Female', 'Fashion accessories', 88.34, 7, 30.919, 649.299, '2019-02-18', '13:28:00', 'Cash', 618.38, 4.761904762, 30.919, 6.6);
 
-USE walmart;
-
 SELECT COUNT(invoiceid) FROM sales;
 -- all 1000 records are present 
 
@@ -1085,83 +1083,282 @@ ALTER TABLE sales ADD COLUMN monthname VARCHAR(10);
 UPDATE sales 
 SET monthname = MONTHNAME(transdate);
 
----------------------------------------------------------------------------------------------------------------------
----------------------- Exploratory Data analysis----------------------------------------------------------------------
+-- --------------------------------------------------------------------------------------------------------------------
+-- -------------------- Exploratory Data analysis----------------------------------------------------------------------
 
--- A. Product Analysis ----------------------------------------------------------------------------------------------
--- A.1. Count of Unique Product Lines in Sales Data
-SELECT COUNT(DISTINCT prodline) as Nos_UniqueProducts 
-FROM Sales;
+-- A. Product Analysis ------------------------------------------------------------------------------------------------
+-- Objective: Evaluate product performance across different metrics to inform inventory management, promotions, and 
+-- cross-selling strategies.
+-- ********************************************************************************************************************
 
--- A.2. Most Common Payment Method
-SELECT payment, COUNT(payment) AS Nos 
+-- A.1. Which product line generates the highest revenue across all branches?
+-- -- Business Use:- Helps in identifying the most lucrative product lines to focus on
+SELECT prodline AS Product, SUM(total) AS Revenue
 FROM Sales
-GROUP BY payment
-ORDER BY COUNT(payment) DESC;
+GROUP BY Product
+ORDER BY Revenue DESC
+LIMIT 1;
 
--- A.3. Top Selling Product Lines
-SELECT prodline AS Products, COUNT(prodline) AS cnt
-FROM Sales
-GROUP BY prodline
-ORDER BY cnt DESC
-LIMIT 3;
+-- =================================================================================================================
 
--- A.4. Total Monthly Revenue Analysis
-SELECT monthname AS Months, SUM(total) AS Revenue
-FROM Sales
-GROUP BY monthname
-ORDER BY Revenue DESC; 
-
--- A.5 Month with the Largest Cost of Goods Sold (COGS)
-SELECT monthname AS Months, SUM(cogs) AS Cost
-FROM Sales
-GROUP BY monthname
-ORDER BY Cost DESC;
-
--- A.6. Product Line with the Largest Revenue
-SELECT prodline AS Products, Sum(total) AS Revenue
-FROM Sales
-GROUP BY prodline
-ORDER BY Revenue DESC;
-
--- A.7. Branch with the Highest Revenue
-SELECT branch, Sum(total) AS Revenue
-FROM Sales
-GROUP BY branch
-ORDER BY Revenue DESC;
-
--- A.8. Product Revenue Analysis Across Branches
-SELECT prodline AS Product, branch AS Branch, Sum(total) AS Revenue
-FROM Sales
-GROUP BY prodline, branch
-ORDER BY Revenue DESC;
-
--- A.9 Branch-wise Product Analysis
-SELECT branch AS Branch, prodline AS Products, Sum(Total) AS Revenue
-FROM Sales
-GROUP BY branch, prodline
-ORDER BY branch, Revenue DESC;
-
--- A.10. Product Line with the Highest Product Tax
-SELECT prodline AS Products, Sum(tax) AS Tax
-FROM Sales
-GROUP BY prodline
-ORDER BY Tax DESC;
-
--- A.11. Average Tax by Product Line
-SELECT prodline AS Products, AVG(tax) AS AvgTax
+-- A.2. Which product lines have the highest average transaction value?
+-- -- Business Use:- Identifies high-value products that may require special attention or promotion.
+SELECT prodline AS Product, AVG(Total) as Avg_TV
 FROM sales
 GROUP BY prodline
-ORDER BY AvgTax DESC;
+ORDER BY Avg_TV DESC;
 
--- A.12. Product Line Performance Evaluation: Good vs. Bad Based on Sales Above Average
-SELECT *
-FROM Sales;
+-- =================================================================================================================
 
+-- A.3. What is the product line distribution of sales for each branch?
+-- -- Business Use:- Helps in understanding product performance per branch, enabling inventory decisions.
+SELECT prodline AS Products, branch AS Branch, SUM(total) Revenue
+FROM Sales
+GROUP BY Branch, Products
+ORDER BY Revenue DESC;
 
--- A.13 Which branch sold more products than average product sold?
-SELECT branch as Branch, SUM(Quantity) as Quantity
+-- =================================================================================================================
+
+-- A.4. What is the product line distribution of sales for each branch?
+-- -- Business Use:- Helps in understanding product performance per branch, enabling inventory decisions.
+SELECT branch AS Branch, prodline AS Products, SUM(total) AS TotalRevenue
+FROM Sales
+GROUP BY Branch, Products
+ORDER BY Branch, TotalRevenue DESC;
+
+-- =================================================================================================================
+
+-- A.5. Which product lines show the most seasonal variation in sales?
+-- -- Business Use:- Helps in planning for seasonal promotions and managing inventory to meet demand during peak seasons.
+SELECT prodline AS Product, monthname AS Month, SUM(total) AS Monthly_Sales
+FROM sales
+GROUP BY Product, Month
+ORDER BY  Product ASC, Monthly_Sales DESC;
+
+-- =================================================================================================================
+
+-- A.6. How does the performance of product lines vary by customer type?
+-- -- Business Use:- Helps in understanding which product lines are more popular among different customer segments, helping in targeted marketing efforts.
+SELECT prodline AS Product, custtype AS Customer, SUM(total) AS Revenue
+FROM sales
+GROUP BY Product, Customer
+ORDER BY Revenue DESC;
+
+-- =================================================================================================================
+
+-- A.7. Which product lines show the most seasonal variation in sales?
+-- -- Business Use:- Helps in planning for seasonal promotions and managing inventory to meet demand during peak seasons.
+SELECT prodline AS Product, monthname AS Months, SUM(total) AS Monthly_Sales
+FROM sales
+GROUP BY Product, Months
+ORDER BY Monthly_Sales DESC;
+
+-- =================================================================================================================
+
+-- A.8. Which product lines have the highest sales volume (number of items sold)?
+-- -- Business Use:- Identifies which product lines are most popular in terms of units sold, which could inform decisions about inventory and 
+-- -- supply chain management.
+SELECT prodline AS Product, SUM(quantity) AS Total_Units_Sold
+FROM Sales
+GROUP BY Product
+ORDER BY Total_Units_Sold DESC;
+
+-- ********************************************************************************************************************
+-- B. Sales Analysis ------------------------------------------------------------------------------------------------
+-- ********************************************************************************************************************
+
+-- B.1.  Which branch has the highest total sales revenue?
+-- -- Business Use:- Identifies top-performing branches, which can inform resource allocation.
+SELECT branch AS Branch, SUM(total) AS Revenue
 FROM sales
 GROUP BY Branch
-HAVING SUM(quantity) > (SELECT AVG(Quantity) FROM sales)
-ORDER BY Quantity DESC;
+ORDER BY Revenue DESC;
+
+-- =================================================================================================================
+
+-- B.2. What are the sales trends over time (monthly)?
+-- -- Business Use:- Helps in forecasting demand and preparing for peak periods.
+SELECT monthname as Months, SUM(total) AS Monthly_Sales
+FROM sales
+GROUP BY Months
+ORDER BY Monthly_Sales DESC;
+
+-- =================================================================================================================
+
+-- B.3. What is the sales performance by payment method?
+-- -- Business Use:- Useful for identifying preferred payment methods, which can impact service offerings
+SELECT payment, SUM(total) AS REVENUE
+FROM sales
+GROUP BY payment
+ORDER BY REVENUE DESC;
+
+-- =================================================================================================================
+
+-- B.4. Which days of the week generate the most sales?
+-- -- Business Use:- Helps in staffing and inventory planning for high-traffic days.
+SELECT dayname AS Day, SUM(total) AS Sales
+FROM sales
+GROUP BY Day
+ORDER BY Sales DESC;
+
+-- =================================================================================================================
+
+-- B.5 What is the average transaction size for each branch?
+-- -- Business Use:- Identifies branches with higher transaction values, indicating better upselling or customer engagement.
+SELECT branch as Branch, AVG(total) AS Avg_Transaction
+FROM sales
+GROUP By Branch
+ORDER BY Avg_Transaction;
+
+-- =================================================================================================================
+
+-- B.6. How do sales vary by customer type?
+-- -- Business Use:- Helps in tailoring marketing and product offerings to different customer segments.
+SELECT custtype as Customer_Type, SUM(total) AS Sales
+FROM sales
+GROUP BY Customer_Type
+ORDER BY Sales DESC;
+
+-- =================================================================================================================
+
+-- B.7. Which branches are underperforming compared to the average branch sales?
+-- -- Business Use:- Helps in identifying branches that may require additional support or strategic changes.
+-- Step 1: total sales for each branch
+WITH BranchSales AS (
+SELECT branch AS Branch, SUM(total) AS TotalSales
+FROM sales
+GROUP BY branch),
+
+-- Step 2: Average Sales across all branches
+OverallAvg AS (
+SELECT AVG(TotalSales) AS AvgBranchSales
+FROM BranchSales)
+
+-- Step 3: Identify underperforming branches 
+SELECT bs.Branch, bs.TotalSales
+FROM BranchSales bs
+JOIN OverallAvg oa
+ON bs.TotalSales < oa.AvgBranchSales
+ORDER BY bs.TotalSales ASC;
+
+
+-- ********************************************************************************************************************
+-- C. Customer Analysis ------------------------------------------------------------------------------------------------
+-- ********************************************************************************************************************
+
+-- C.1. What is the average spend per customer type?
+-- -- Business Use:- Identifies the most valuable customer segments for targeted marketing.
+SELECT custtype as Customer, AVG(total) AS Avg_Spend
+FROM sales
+GROUP BY Customer
+ORDER BY Avg_Spend DESC;
+
+-- =================================================================================================================
+
+-- C.2. Which customer segment has the highest purchase frequency?
+-- -- Business Use:- Helps in understanding the engagement level of different customer segments.
+SELECT custtype as Customer_Type, COUNT(invoiceid) AS Purchase_Frequency
+FROM sales
+GROUP BY Customer_Type
+ORDER BY Purchase_Frequency DESC;
+
+-- =================================================================================================================
+
+-- C.3. What is the gender distribution of purchases?
+-- -- Business Use:- Useful for tailoring marketing campaigns to different genders.
+SELECT gender as GENDER, COUNT(invoiceid) AS Purchase_Count
+FROM sales
+GROUP BY GENDER
+ORDER BY Purchase_Count DESC;
+
+-- =================================================================================================================
+
+-- C.4. What is the revenue contribution by customer type?
+-- -- Business Use:- Provides insights into which customer segments are driving the most revenue.
+SELECT custtype AS Customer, SUM(total) AS Revenue
+FROM sales
+GROUP BY Customer
+ORDER BY Revenue DESC;
+
+-- =================================================================================================================
+
+-- C.5. What is the distribution of sales across different times of day (morning, afternoon, evening)
+-- -- Business Use:- Useful for staffing and scheduling promotions.
+SELECT timeofday, SUM(total) AS Sales
+FROM sales
+GROUP BY timeofday
+ORDER BY Sales DESC;
+
+-- ********************************************************************************************************************
+-- D. Profitability Analysis ------------------------------------------------------------------------------------------------
+-- ********************************************************************************************************************
+
+-- D.1. Which product lines are the most profitable?
+-- -- Business Use:- Identifies the products that contribute the most to the bottom line.
+SELECT prodline AS Product, SUM(total - cogs)/sum(cogs) *100 AS Profitpct
+FROM sales
+GROUP BY Product
+ORDER BY Profitpct;
+
+-- =================================================================================================================
+
+-- D.2. Which branches are the most profitable?
+-- -- Business Use:- Helps in resource allocation to the most profitable branches.
+SELECT branch AS Branch, SUM(total - cogs) AS Profit
+FROM sales
+GROUP BY branch
+ORDER BY Profit DESC;
+
+-- =================================================================================================================
+
+-- D.3. What is the profit margin for each product line?
+-- -- Business Use:- Provides insights into how much profit is made from each dollar of sales.
+SELECT prodline AS Products, SUM(total - cogs) AS Profit
+FROM sales
+GROUP BY Products
+ORDER BY Profit DESC;
+
+-- =================================================================================================================
+
+-- D.4. How does profitability vary by customer type?
+-- -- Business Use:- Helps in identifying the most profitable customer segments.
+SELECT custtype AS Customer, SUM(total - cogs) AS Profit
+FROM sales
+GROUP BY Customer
+ORDER BY Profit DESC;
+
+-- =================================================================================================================
+
+-- D.5. Which product lines have the highest gross margin?
+-- -- Business Use:- Focuses on profitability, helping to identify the product lines that contribute the most to the bottom line.
+SELECT prodline AS Product, SUM(grossinc) / SUM(total) * 100 AS Gross_Margin_Pct
+FROM Sales
+GROUP BY prodline
+ORDER BY Gross_Margin_Pct DESC;
+
+-- =================================================================================================================
+
+-- D.6. Which payment methods are associated with the highest profit margins?
+-- -- Business Use:- Helps in understanding the cost-effectiveness of different payment methods.
+SELECT payment, SUM(total - cogs)/SUM(cogs) * 100 AS ProfitMargin
+FROM sales
+GROUP BY payment
+ORDER BY ProfitMargin DESC;
+
+-- =================================================================================================================
+
+-- D.7. Which time of the year (e.g., by month or quarter) is the most profitable?
+-- -- Business Use:- Useful for planning promotions and inventory for high-profit periods.
+SELECT monthname AS Months, SUM(total - cogs) AS Profit
+FROM sales
+GROUP BY Months
+ORDER BY Profit DESC;
+
+-- =================================================================================================================
+
+-- D.8. Which product lines have the highest customer satisfaction (based on ratings)?
+-- -- Business Use:- Useful for understanding customer preferences and maintaining high-quality standards for products.
+SELECT prodline AS Product, AVG(rating) AS Avg_Rating
+FROM Sales
+GROUP BY prodline
+ORDER BY Avg_Rating DESC;
