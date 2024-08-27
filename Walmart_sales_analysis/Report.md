@@ -1,6 +1,6 @@
 # **Walmart Sales Analysis Report**
 
-### **Executive Summary**
+### **Summary**
 
 This report provides an in-depth analysis of Walmart's sales data, focusing on key areas such as product performance, branch efficiency, customer behavior, and profitability. The primary goal is to identify actionable insights that can enhance Walmart's strategic decision-making and drive business growth. Key findings include the dominance of the "Food and beverages" product line in revenue generation, the exceptional performance of Branch C, and the notable profitability associated with certain product lines and payment methods. Recommendations include optimizing inventory for high-performing branches, enhancing digital payment options, and targeting promotions around peak sales periods.
 
