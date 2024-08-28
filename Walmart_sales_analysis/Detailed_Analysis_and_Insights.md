@@ -48,7 +48,7 @@ We began by creating the Walmart database to organize and store sales data effec
 ### **Product Analysis Insights**
 
 1. **Highest Revenue Product Line**
-   - ![SQL Query A1](path to image)
+   
    - **Result:** "Food and beverages" generated the highest revenue across all branches, totaling $56,144.96.
    - **Insight:** Focus promotions and inventory on this category to maximize profits.
 
