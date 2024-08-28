@@ -53,35 +53,35 @@ We began by creating the Walmart database to organize and store sales data effec
    - **Insight:** Focus promotions and inventory on this category to maximize profits.
 
 2. **Highest Average Transaction Value**
-   - ![SQL Query A2](path to image)
+
    - **Result:** "Home and lifestyle" leads with an average transaction value of $336.64, followed by "Sports and travel" at $332.07.
    - **Insight:** Target higher-spending customers for these products through premium marketing strategies.
 
 3. **Branch-Specific Product Line Performance**
-   - ![SQL Query A3](path to image)
+
    - **Result:** Branch B excels in "Sports and travel" and "Health and beauty," while Branch A leads in "Home and lifestyle" and "Electronic accessories."
    - **Insight:** Tailor inventory and marketing strategies to the dominant product lines in each branch based on regional preferences.
 
 4. **Seasonal Variation in Product Line Sales**
-   - ![SQL Query A4](path to image)
+
    - **Result:** "Sports and travel" peaks in January, and "Home and lifestyle" in March.
    - **Insight:** Align promotions and inventory management with these peak periods to optimize sales.
 
 5. **Product Line Performance by Customer Type**
-   - ![SQL Query A5](path to image)
+   
    - **Result:** Members generate higher revenue in "Food and beverages" and "Sports and travel," while non-members prefer "Electronic accessories."
    - **Insight:** Enhance loyalty programs and personalized offers to further engage members and boost spending.
 
-7. **Consistent Seasonal Sales Trends**
-   - ![SQL Query A7](path to image)
+6. **Consistent Seasonal Sales Trends**
+   
    -  **Result:** Seasonal trends were confirmed, with "Sports and travel" peaking in January and March.
    - **Insight:** Reinforce the importance of strategic stock management and seasonal sales planning.
 
-8. **Highest Sales Volume**
+7. **Highest Sales Volume**
    - **Result:** "Electronic accessories" sold the most units (971), followed by "Food and beverages" (952).
    - **Insight:** Ensure these popular products are well-stocked and leverage upselling opportunities to further boost sales.
 
-9. **Highest Total Sales Revenue by Branch**
+8. **Highest Total Sales Revenue by Branch**
    - **Result:** Branch C generated the highest revenue at $110,568.86, followed by Branch A at $106,200.57.
    - **Insight:** Focus on maintaining and boosting Branch C’s performance by understanding the factors driving its success.
 
