@@ -24,7 +24,7 @@ This project focuses on analyzing Walmart's sales data to uncover insights that 
 
 The major objective of this project is to gain a comprehensive understanding of Walmart's sales data to identify various factors that influence sales across different branches. This analysis aims to:
 - Identify top-performing products and branches.
-- Understand customer purchasing behavior and preferences.
+- Understand customer behavior analysis and preferences.
 - Analyze the profitability of different products and payment methods.
 - Uncover seasonal sales trends and high-demand periods.
 
