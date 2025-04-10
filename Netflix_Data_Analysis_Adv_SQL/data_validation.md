@@ -14,3 +14,4 @@ Before beginning the business analysis, the Netflix dataset was validated for co
 
 These checks helped guarantee that the data loaded into MySQL was ready for reliable and meaningful business insights.
 
+**[SQL Data Validation Script](https://github.com/meenakshi-sethi/My_SQL_Projects/blob/main/Netflix_Data_Analysis_Adv_SQL/netlfix_data_validation.sql)**
