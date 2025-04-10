@@ -24,8 +24,6 @@ The goal is to extract actionable insights and develop an analytical mindset whi
 - 📌 Provide **Business Objective** for each question to tie it back to decision-making.
 - 📌 Perform **Pivoting/Unpivoting** for better genre/actor analysis.
 - 📌 Summarize **Executive-Level Insights** about Netflix's content strategy based on the findings.
-- 📌 Build a project structure that is both **portfolio-worthy** and **excellent for interviews**.
-
 ---
 
 # 🧠 Learning Goals:
